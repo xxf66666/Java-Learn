@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- pom.xml = Maven 项目描述文件（Project Object Model）-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- 固定写死 4.0.0，是 Maven 自身的版本 -->
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.learning</groupId>
-    <artifactId>maven-demo</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <!-- 项目坐标三件套：groupId : artifactId : version 全球唯一标识一个 artifact -->
+    <groupId>com.learning</groupId>                 <!-- 组织/公司名 -->
+    <artifactId>maven-demo</artifactId>             <!-- 项目名 -->
+    <version>1.0.0-SNAPSHOT</version>               <!-- 版本号，-SNAPSHOT 表示开发版 -->
+    <packaging>jar</packaging>                       <!-- 打包类型：jar / war / pom -->
 
+    <!-- properties 可以定义变量，下面用 ${} 引用 -->
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>21</maven.compiler.source>             <!-- 用 JDK 21 编译 -->
+        <maven.compiler.target>21</maven.compiler.target>             <!-- 编译出 JDK 21 字节码 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>   <!-- 源码编码 -->
     </properties>
 
+    <!-- 项目依赖列表 -->
     <dependencies>
+        <!-- Apache Commons Lang3：补充 JDK 自带 String/Number 工具 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.14.0</version>
         </dependency>
 
+        <!-- SLF4J 日志门面（接口） -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>2.0.13</version>
         </dependency>
+        <!-- Logback 是 SLF4J 的实现，运行时提供日志真正的输出能力 -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -34,19 +43,21 @@
         </dependency>
     </dependencies>
 
+    <!-- 构建配置：插件 -->
     <build>
         <plugins>
-            <!-- 打可执行 jar -->
+            <!-- maven-shade-plugin: 打"可执行 jar"，把所有依赖一并打进去 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.5.1</version>
                 <executions>
                     <execution>
-                        <phase>package</phase>
-                        <goals><goal>shade</goal></goals>
+                        <phase>package</phase>             <!-- 绑定到 package 阶段 -->
+                        <goals><goal>shade</goal></goals>   <!-- 调用 shade 目标 -->
                         <configuration>
                             <transformers>
+                                <!-- 给打出来的 jar 写入 Main-Class 属性，java -jar 就能找到入口 -->
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>com.learning.App</mainClass>
                                 </transformer>

@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Logback 配置文件，放在 src/main/resources 下 Logback 启动会自动找 -->
 <configuration>
+
+    <!-- appender = 日志的"输出目的地"。这个 STDOUT 把日志写到控制台 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoder 定义每条日志的格式 -->
         <encoder>
+            <!--
+              %d{HH:mm:ss.SSS}    时间
+              %thread             线程名
+              %-5level            日志级别（左对齐，宽度 5）
+              %logger{36}         Logger 名字，截短到 36 字符
+              %msg                消息正文
+              %n                  跨平台换行
+            -->
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
+    <!-- root logger 是所有日志的根节点；level=INFO 表示 INFO 及以上才输出 -->
     <root level="INFO">
+        <!-- 把日志发到上面定义的 STDOUT appender -->
         <appender-ref ref="STDOUT"/>
     </root>
 
+    <!-- 单独给某个包/类设级别（覆盖 root） -->
+    <!-- 我们的业务代码用 DEBUG，能看到详细信息 -->
     <logger name="com.learning" level="DEBUG"/>
+    <!-- HikariCP 启动信息默认啰嗦，调高到 WARN 减噪 -->
     <logger name="com.zaxxer.hikari" level="WARN"/>
 </configuration>
