@@ -14,13 +14,13 @@
 
 ---
 
-> **关于本项目**：这是一份**个人学习记录**，不是教学权威材料。我有 C++ / Python 基础，第一次系统学 Java，目标是做企业级 ERP 后端开发。仓库同步记录笔记、代码、踩坑、Demo —— 欢迎 issue / PR 批评指正。
+> **关于本项目**：这是一份**个人学习记录**，不是教学权威材料。我有 Python 基础、接触过一点 C++，第一次系统学 Java，目标是做企业级 ERP 后端开发。仓库同步记录笔记、代码、踩坑、Demo —— 欢迎 issue / PR 批评指正。
 
 ---
 
 ## 项目目标
 
-按 "**语法对照速通 → 面向对象 + JVM → 持久层 → Web → Spring 全家桶 → ERP 实战**" 的节奏，把 Java 从语言层一路推到企业级应用。每周产出：**理论笔记 + 可运行代码 + 一次自我验收**。最终落地一个**多模块 Spring Boot ERP 系统**（用户/权限/物料/库存/采购/销售）。
+按 "**Python 视角入门 → 面向对象 + JVM → 持久层 → Web → Spring 全家桶 → ERP 实战**" 的节奏，把 Java 从语言层一路推到企业级应用。每周产出：**理论笔记 + 可运行代码 + 一次自我验收**。最终落地一个**多模块 Spring Boot ERP 系统**（用户/权限/物料/库存/采购/销售）。
 
 ## 进度概览
 
@@ -118,14 +118,14 @@ Java-Learn/
 
 具体安装与 IDEA 配置见 [`docs/week1/01_setup.md`](docs/week1/01_setup.md)。
 
-## 给 C++/Python 老兵的速通建议
+## 给有 Python 基础的同学：速通建议
 
-- **跳过的部分**：`if/for/while`、基本类型、函数调用、注释 —— 看一遍语法表就行
-- **重点学的部分**：JVM 内存模型、类加载机制、引用类型 vs 值类型、泛型擦除、注解、反射、并发原语（`synchronized` / `volatile` / `CAS`）、Stream API、Spring 的 IoC/AOP 思想
-- **企业开发独有的**：Maven 依赖管理、ORM 思维、AOP 切面、事务传播、Bean 生命周期 —— Python 写脚本基本不碰，但是 Java 企业开发的基本盘
-- **少踩的坑**：Java 没有运算符重载、没有多继承（用 interface）、`==` 比较引用（用 `.equals()`）、`String` 不可变（拼接用 `StringBuilder`）
+- **能快速带过的部分**：`if/for/while`、基本类型、函数调用、注释 —— Java 写法和 Python 区别不大，看一遍语法对照表就行
+- **新概念，必须重点学**：静态强类型（变量先声明类型）、JVM（Java 的"解释器"）、引用 vs 值、泛型、注解、反射、Stream API、Spring 的 IoC/AOP 思想
+- **Python 没有、但 Java 企业开发离不开的**：Maven 依赖管理、ORM 思维、AOP 切面、事务传播、Bean 生命周期
+- **容易踩的坑**：Java 必须显式声明类型；判断字符串相等要用 `.equals()` 不能用 `==`；`String` 不可变（拼接用 `StringBuilder`）；没有多继承（用 interface）
 
-详见 [`docs/week1/00_java_for_cpp_python_dev.md`](docs/week1/00_java_for_cpp_python_dev.md)。
+详见 [`docs/week1/00_java_from_python.md`](docs/week1/00_java_from_python.md)。
 
 ## 学习资源（精选）
 

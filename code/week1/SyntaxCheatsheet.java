@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Week 1 · Java 语法对照速查（针对 C++ / Python 老兵）
+ * Week 1 · Java 语法对照速查（Python 视角）
  *
  * 把这份代码完整 debug 一遍，每段后面打断点，观察变量。
- * 看不懂的地方查阅 docs/week1/00_java_for_cpp_python_dev.md
+ * 看不懂的地方查阅 docs/week1/00_java_from_python.md
  */
 public class SyntaxCheatsheet {
 
@@ -29,10 +29,10 @@ public class SyntaxCheatsheet {
         long l = 100_000_000_000L;       // 加 L，否则编译错误（字面量默认 int）
         double d = 3.14;
         float f = 3.14f;                 // float 字面量加 f
-        boolean flag = true;              // 不是 bool！
+        boolean flag = true;              // Python 里叫 bool，Java 里叫 boolean
         char ch = '中';                   // char 是 16 位 Unicode，能装一个汉字
 
-        // 自动类型提升（与 C++ 一致）
+        // 自动类型提升（小类型 + 大类型 → 大类型）
         long sum = i + l;
         double avg = (i + d) / 2;
 
@@ -73,7 +73,7 @@ public class SyntaxCheatsheet {
         else if (score >= 80) System.out.println("B");
         else System.out.println("C");
 
-        // 经典 for（C++ 风格）
+        // 经典 for（用计数器 i 控制）
         int sum = 0;
         for (int i = 1; i <= 10; i++) sum += i;
         System.out.println("1..10 求和 = " + sum);

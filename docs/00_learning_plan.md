@@ -1,6 +1,6 @@
 # Java + Spring + ERP 学习计划
 
-> 适合对象：有 C++ / Python 基础，首次系统学习 Java，目标是企业级 ERP 后端开发
+> 适合对象：有 Python 基础（C++ 接触过即可），首次系统学习 Java，目标是企业级 ERP 后端开发
 > 总时长：12 周（每天 1-2 小时，周末多投入 2-3 小时）
 > 终极产出：一个可运行的多模块 Spring Boot ERP 系统 + 完整笔记
 
@@ -45,14 +45,16 @@ Java-Learn/
 - JDK / JRE / JVM 关系，class 文件如何运行
 - 基本类型 vs 引用类型，`==` vs `.equals()`
 - `String` 不可变、`StringBuilder` 拼接
-- 控制流（与 C++/Python 几乎一致）、方法定义
+- 控制流（和 Python 几乎一致，只是要加 `{}` 和 `;`）、方法定义
 - 包（package）、import、访问修饰符（public/private/protected/默认）
 
-**与 C++/Python 对照重点**
-- C++ 的指针 / 引用 → Java 全是引用，没有指针运算
-- Python 的鸭子类型 → Java 静态强类型，必须声明类型
-- C++ 的析构函数 → Java 没有，GC 处理；`try-with-resources` 替代 RAII
-- Python 的列表推导式 → Java 用 Stream API 替代（W3 学）
+**从 Python 视角看 Java（最重要的差异）**
+- Python 变量随便用，Java 必须**先声明类型**：`int x = 10;` 不是 `x = 10`
+- Python `print(x)` → Java `System.out.println(x)`
+- Python `len(s)` → Java `s.length()`（字符串）或 `list.size()`（集合）
+- Python 列表推导 `[n*2 for n in nums]` → Java Stream API（W3 学）
+- Python 万物皆对象、引用语义 → Java 也是引用语义，但有"基本类型"（int / double 等）是值
+- C++ 概念出现时（如"指针"），我会顺手解释，不假定你懂
 
 **学习资源**
 - [Oracle Java Tutorials - Getting Started](https://docs.oracle.com/javase/tutorial/getStarted/index.html)
