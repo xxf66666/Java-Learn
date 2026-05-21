@@ -23,6 +23,7 @@ Java-Learn/
 | Phase | 周次 | 主题 | 关键产出 |
 |-------|------|------|----------|
 | **1. 语言基础** | W1 | Java 语法速通（C++/Python 对照） | 命令行计算器 |
+| | **W1.5** | **语法专项**（类型 / 字符串 / 修饰符 / 枚举 / 内部类 / 泛型 / 注解反射） | 8 个独立 demo |
 | | W2 | OOP + 集合 + 异常 + IO | 学生管理系统（内存版） |
 | | W3 | 并发 + JVM + Stream | 多线程文件统计工具 |
 | **2. 工程化 + 持久层** | W4 | Maven + JUnit + JDBC + MySQL | JDBC 通讯录 |
@@ -71,6 +72,24 @@ code/week1/
 ```
 
 **验收标准**：能在 IDEA 里新建项目、运行、debug 断点；能用 Scanner 读输入、用 println 输出；能解释 `String s1 = "a"; String s2 = "a";` 中 `s1 == s2` 为什么是 true。
+
+---
+
+### Week 1.5：语法专项
+
+Week 1 速通后**先消化这一周再进 Week 2**。把容易踩坑、Week 1 跳过的语法细节系统补齐。
+
+**8 个主题**
+1. **基本类型 + 装箱拆箱**：Integer 缓存、整数溢出、浮点精度（BigDecimal）
+2. **数组 + varargs**：一维 / 二维 / Arrays 工具类 / 可变参数
+3. **字符串深入**：不可变、常量池、StringBuilder、文本块
+4. **修饰符总览**：访问 + static / final / abstract / synchronized / volatile / transient
+5. **枚举**：基础 + 带字段方法 + 实现接口 + EnumMap
+6. **内部类 + Lambda**：静态内部类（Builder）、匿名类、Lambda、方法引用、变量捕获
+7. **泛型进阶**：? extends / ? super、PECS、类型擦除
+8. **注解 + 反射初步**：自定义注解、反射 new、读注解、迷你 IoC
+
+详见 [`docs/week1.5/`](week1.5/)
 
 ---
 
