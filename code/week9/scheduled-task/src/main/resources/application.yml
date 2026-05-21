@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: scheduled-task
+  main:
+    web-application-type: none
+
+logging:
+  level:
+    com.learning: INFO

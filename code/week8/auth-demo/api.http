@@ -1,0 +1,33 @@
+### 注册
+POST http://localhost:8080/api/register
+Content-Type: application/json
+
+{
+  "username": "alice",
+  "password": "password123"
+}
+
+### 登录拿 token
+# @name login
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "username": "alice",
+  "password": "password123"
+}
+
+### 看当前用户（要 token）
+GET http://localhost:8080/api/me
+Authorization: Bearer {{login.response.body.data.token}}
+
+### 调管理员接口（普通用户应返回 403）
+GET http://localhost:8080/api/admin/secret
+Authorization: Bearer {{login.response.body.data.token}}
+
+### 不带 token 访问（应返回 401）
+GET http://localhost:8080/api/me
+
+### 带错的 token（应返回 401）
+GET http://localhost:8080/api/me
+Authorization: Bearer invalid.token.here
