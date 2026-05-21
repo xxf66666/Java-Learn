@@ -1,0 +1,44 @@
+### 列出
+GET http://localhost:8080/api/products
+
+### 创建
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+  "name": "iPhone 15",
+  "price": 5999.00,
+  "stock": 100
+}
+
+### 创建 - 校验失败示例
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+  "name": "",
+  "price": -10,
+  "stock": -1
+}
+
+### 按 ID 查
+GET http://localhost:8080/api/products/1
+
+### 更新
+PUT http://localhost:8080/api/products/1
+Content-Type: application/json
+
+{
+  "name": "iPhone 15 Pro",
+  "price": 7999.00,
+  "stock": 50
+}
+
+### 模糊搜索
+GET http://localhost:8080/api/products?name=iPhone
+
+### 删除
+DELETE http://localhost:8080/api/products/1
+
+### 删除不存在
+DELETE http://localhost:8080/api/products/9999

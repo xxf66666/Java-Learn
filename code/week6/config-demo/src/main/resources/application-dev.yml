@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+mail:
+  host: smtp.dev.local
+  port: 1025
+  username: dev@local
+  recipients:
+    - dev@local
+    - tester@local
+
+logging:
+  level:
+    com.learning: DEBUG

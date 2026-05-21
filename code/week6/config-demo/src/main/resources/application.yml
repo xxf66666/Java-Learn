@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev      # 启动时改为 prod 或用 --spring.profiles.active=prod
+
+server:
+  port: 8080
+
+mail:
+  host: smtp.default.com
+  port: 25
+  username: noreply@default.com
+  recipients:
+    - x@default.com
