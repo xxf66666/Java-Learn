@@ -1,0 +1,48 @@
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.fleet/
+
+# Build
+target/
+build/
+out/
+*.class
+*.jar
+*.war
+*.ear
+hs_err_pid*
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Ruflo / Claude artifacts
+ruvector.db
+.claude/
+.ruflo/
+*.swp
+
+# Env / secrets
+.env
+.env.local
+*.key
+*.pem
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Gradle
+.gradle/
+gradle-app.setting
+gradlew
+gradlew.bat
