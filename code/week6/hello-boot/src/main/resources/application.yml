@@ -1,16 +1,23 @@
+# Spring Boot 配置文件
+# YAML 用缩进表层级（2 个空格，不能用 tab）
+
 server:
-  port: 8080
+  port: 8080            # 内嵌 Tomcat 监听端口
 
 spring:
   application:
-    name: hello-boot
+    name: hello-boot    # 应用名，会出现在日志、监控里
 
+# Actuator: Spring Boot 的运维端点
+# 暴露 /actuator/health 等接口，监控用
 management:
   endpoints:
     web:
       exposure:
+        # include 是要暴露的端点列表
+        # health 健康检查 / info 应用信息 / metrics 指标
         include: health,info,metrics
 
 logging:
   level:
-    root: INFO
+    root: INFO          # 根日志级别（所有未单独设置的 logger 用 INFO）
