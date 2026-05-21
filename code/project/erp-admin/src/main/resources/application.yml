@@ -1,47 +1,59 @@
+# ERP 主配置（dev / prod 环境通过 spring.profiles.active 切换）
+
 server:
-  port: 8080
+  port: 8080                        # 内嵌 Tomcat 监听端口
   servlet:
-    context-path: /
+    context-path: /                  # 应用上下文：所有 URL 前缀（/ 表示根）
 
 spring:
   profiles:
-    active: dev
+    active: dev                      # 默认激活的环境（可被命令行 --spring.profiles.active=prod 覆盖）
   application:
     name: erp-admin
+
+  # 数据源：HikariCP 连接池（Spring Boot 默认）
   datasource:
+    # JDBC URL：serverTimezone 防"unable to determine"错误；allowPublicKeyRetrieval 让 MySQL 8 默认加密握手通过
     url: jdbc:mysql://localhost:3306/erp?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=utf8
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
-      maximum-pool-size: 10
+      maximum-pool-size: 10          # 最大连接数
+
+  # Redis 配置
   data:
     redis:
       host: localhost
       port: 6379
+
+  # Jackson 全局配置：日期格式 / 时区 / null 不输出
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
     default-property-inclusion: non_null
 
+# MyBatis-Plus 配置
 mybatis-plus:
   configuration:
-    map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true                          # 下划线 ↔ 驼峰自动转
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl        # 控制台打印 SQL（开发用，生产关掉）
   global-config:
     db-config:
-      logic-delete-field: deleted
-      logic-delete-value: 1
-      logic-not-delete-value: 0
+      logic-delete-field: deleted                                # 全局逻辑删除字段名
+      logic-delete-value: 1                                       # 已删除的值
+      logic-not-delete-value: 0                                   # 未删除的值
 
+# 自定义 JWT 配置（被 JwtUtil 通过 @Value 读取）
 jwt:
-  secret: change-this-secret-key-to-at-least-32-bytes-long-please!
+  secret: change-this-secret-key-to-at-least-32-bytes-long-please!     # ⚠️ 生产环境必须改成强密钥
   expire-days: 7
 
+# Knife4j 接口文档
 knife4j:
   enable: true
 
 logging:
   level:
-    com.learning: DEBUG
-    com.zaxxer.hikari: WARN
+    com.learning: DEBUG               # 我们自己的代码 DEBUG，看详细信息
+    com.zaxxer.hikari: WARN            # HikariCP 启动信息减噪

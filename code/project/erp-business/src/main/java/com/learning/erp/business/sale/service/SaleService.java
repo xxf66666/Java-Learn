@@ -19,6 +19,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * 销售服务：和 PurchaseService 结构对称
+ * 主要差异：库存做"出库"（StockService.outbound），库存不足会回滚
+ */
 @Service
 public class SaleService {
 
@@ -32,12 +36,15 @@ public class SaleService {
         this.stockService = stockService;
     }
 
+    /** 创建销售单（DRAFT） */
     @Transactional(rollbackFor = Exception.class)
     public Long create(SalOrderCreateReq req) {
         if (req.getItems() == null || req.getItems().isEmpty()) throw new BusinessException(400, "明细不能为空");
         if (req.getWarehouseId() == null) throw new BusinessException(400, "仓库不能为空");
 
+        // 算总金额
         BigDecimal total = BigDecimal.ZERO;
+        // var 是 Java 10+ 的局部类型推断
         for (var it : req.getItems()) total = total.add(it.getPrice().multiply(it.getQuantity()));
 
         SalOrder o = new SalOrder();
@@ -50,6 +57,7 @@ public class SaleService {
         o.setRemark(req.getRemark());
         orderMapper.insert(o);
 
+        // 插明细
         for (var it : req.getItems()) {
             SalOrderItem item = new SalOrderItem();
             item.setOrderId(o.getId());
@@ -62,6 +70,7 @@ public class SaleService {
         return o.getId();
     }
 
+    /** 审核：DRAFT → APPROVED */
     @Transactional(rollbackFor = Exception.class)
     public void approve(Long id) {
         SalOrder o = orderMapper.selectById(id);
@@ -73,6 +82,12 @@ public class SaleService {
         orderMapper.updateById(o);
     }
 
+    /**
+     * 出库：APPROVED → DONE，依次出库每条明细
+     *
+     * ⚠️ 关键：库存不足时 StockService.outbound 会抛 BusinessException
+     *    @Transactional 会自动回滚整个出库过程
+     */
     @Transactional(rollbackFor = Exception.class)
     public void outbound(Long id) {
         SalOrder o = orderMapper.selectById(id);
@@ -87,7 +102,7 @@ public class SaleService {
                 item.getMaterialId(),
                 o.getWarehouseId(),
                 item.getQuantity(),
-                "SALE",
+                "SALE",                            // bizType
                 o.getOrderNo(),
                 "销售出库");
         }
@@ -96,10 +111,12 @@ public class SaleService {
         orderMapper.updateById(o);
     }
 
+    /** 查明细列表 */
     public List<SalOrderItem> listItems(Long orderId) {
         return itemMapper.selectList(new LambdaQueryWrapper<SalOrderItem>().eq(SalOrderItem::getOrderId, orderId));
     }
 
+    /** SO20251201-0001 风格单号 */
     private String nextOrderNo() {
         String day = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
         long count = orderMapper.selectCount(new LambdaQueryWrapper<SalOrder>()
