@@ -1,0 +1,99 @@
+### ===== ERP 完整业务流程 =====
+
+### 1. 登录拿 token
+# @name login
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+### 2. 看我的菜单
+GET http://localhost:8080/api/menus/me
+Authorization: Bearer {{login.response.body.data.token}}
+
+### 3. 看物料列表
+GET http://localhost:8080/api/business/material/page?page=1&size=10
+Authorization: Bearer {{login.response.body.data.token}}
+
+### 4. 看仓库列表
+GET http://localhost:8080/api/business/warehouse
+Authorization: Bearer {{login.response.body.data.token}}
+
+### 5. 创建采购单：iPhone 10 个，单价 4500
+# @name createPur
+POST http://localhost:8080/api/business/purchase
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.data.token}}
+
+{
+  "supplierName": "苹果供应商",
+  "warehouseId": 1,
+  "remark": "12 月备货",
+  "items": [
+    {"materialId": 1, "quantity": 10, "price": 4500}
+  ]
+}
+
+### 6. 审核采购单
+PUT http://localhost:8080/api/business/purchase/{{createPur.response.body.data}}/approve
+Authorization: Bearer {{login.response.body.data.token}}
+
+### 7. 入库
+POST http://localhost:8080/api/business/purchase/{{createPur.response.body.data}}/inbound
+Authorization: Bearer {{login.response.body.data.token}}
+
+### 8. 查库存：应该看到 iPhone 库存 10
+GET http://localhost:8080/api/business/stock?materialId=1
+Authorization: Bearer {{login.response.body.data.token}}
+
+### 9. 创建销售单：iPhone 卖 3 个，单价 5999
+# @name createSal
+POST http://localhost:8080/api/business/sale
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.data.token}}
+
+{
+  "customerName": "门店 A",
+  "warehouseId": 1,
+  "items": [
+    {"materialId": 1, "quantity": 3, "price": 5999}
+  ]
+}
+
+### 10. 审核销售单
+PUT http://localhost:8080/api/business/sale/{{createSal.response.body.data}}/approve
+Authorization: Bearer {{login.response.body.data.token}}
+
+### 11. 出库
+POST http://localhost:8080/api/business/sale/{{createSal.response.body.data}}/outbound
+Authorization: Bearer {{login.response.body.data.token}}
+
+### 12. 查库存：应该剩 7
+GET http://localhost:8080/api/business/stock?materialId=1
+Authorization: Bearer {{login.response.body.data.token}}
+
+### 13. 查流水：应该有 2 条 (+10 入库, -3 出库)
+GET http://localhost:8080/api/business/stock/1/logs
+Authorization: Bearer {{login.response.body.data.token}}
+
+### 14. 故意超卖：销售 100 个 → 应该返回库存不足
+POST http://localhost:8080/api/business/sale
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.data.token}}
+
+{
+  "customerName": "想吃霸王餐",
+  "warehouseId": 1,
+  "items": [{"materialId": 1, "quantity": 100, "price": 5999}]
+}
+
+# 接下来需要审核 + 出库才会真实尝试扣减
+# 走 9-11 三步，第 11 步会回滚并返回 STOCK_INSUFFICIENT
+
+### 15. 看操作日志
+GET http://localhost:8080/api/users
+Authorization: Bearer {{login.response.body.data.token}}
+# 注：操作日志在 sys_operation_log 表里，自己用 SQL 看

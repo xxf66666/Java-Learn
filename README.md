@@ -28,25 +28,25 @@
 <tr>
 <td width="50%" valign="top">
 
-### Phase 1 · Java 语言基础 (Week 1-3)
+### Phase 1 · Java 语言基础 (Week 1-3) ✅
 
-**任务**：从 C++/Python 视角速通 Java 语法、面向对象、集合、并发、JVM
+**任务**：从 Python 视角速通 Java 语法、面向对象、集合、并发、JVM
 
-- Week 1：语法对照速通 + IDEA 工具链
-- Week 2：OOP 三大特性、泛型、集合框架、异常、IO/NIO
-- Week 3：并发（Thread / 锁 / 线程池）、JVM 内存模型、Lambda + Stream
+- Week 1：语法速通 + IDEA 工具链
+- Week 2：OOP + 集合 + 异常 + IO（学生管理系统）
+- Week 3：并发 + JVM + Lambda + Stream（多线程文件统计）
 
 [详见 `docs/week1/` ~ `docs/week3/`](docs/)
 
 </td>
 <td width="50%" valign="top">
 
-### Phase 2 · 工程化 + 持久层 (Week 4-5)
+### Phase 2 · 工程化 + 持久层 (Week 4-5) ✅
 
 **任务**：Maven、JUnit、SLF4J、JDBC、MySQL、第一份 Spring 入门
 
-- Week 4：Maven / Gradle、JUnit 5、日志、JDBC + MySQL
-- Week 5：Spring Core —— IoC 容器、Bean 生命周期、AOP、声明式事务
+- Week 4：Maven 多模块 + JUnit 5 + Logback + JDBC 通讯录 CLI
+- Week 5：Spring Core —— IoC / AOP / 事务（基于纯 spring-context）
 
 [详见 `docs/week4/` ~ `docs/week5/`](docs/)
 
@@ -55,33 +55,53 @@
 <tr>
 <td width="50%" valign="top">
 
-### Phase 3 · Spring Boot Web 全栈 (Week 6-8)
+### Phase 3 · Spring Boot Web 全栈 (Week 6-8) ✅
 
 **任务**：Spring MVC + Spring Boot + MyBatis-Plus + Security + JWT
 
-- Week 6：Spring Boot 起步、自动装配、配置管理、Spring MVC
-- Week 7：MyBatis-Plus / JPA、分页、事务、多数据源
-- Week 8：RESTful API 规范、Spring Security + JWT、统一异常、参数校验
+- Week 6：Spring Boot 起步、自动装配、配置管理、Spring MVC + 商品 CRUD
+- Week 7：MyBatis-Plus（分页、自动填充、逻辑删除、乐观锁）+ 博客后端
+- Week 8：Spring Security + JWT 鉴权 + Knife4j 文档
 
 [详见 `docs/week6/` ~ `docs/week8/`](docs/)
 
 </td>
 <td width="50%" valign="top">
 
-### Phase 4 · 中间件 + ERP 实战 (Week 9-12)
+### Phase 4 · 中间件 + ERP 实战 (Week 9-12) ✅
 
 **任务**：缓存、MQ、定时任务，最后落地完整 ERP 项目
 
-- Week 9：Redis 缓存、RabbitMQ、XXL-Job、文件上传
-- Week 10：ERP 架构设计 —— RBAC 权限、组织架构、字典、审计日志
-- Week 11：ERP 业务 —— 物料 / 库存 / 采购 / 销售 / 订单
-- Week 12：整合 + 前后端联调（Vue3 / Element-Plus）+ Docker 部署
+- Week 9：Redis 缓存、RabbitMQ、Spring Task、文件上传
+- Week 10：ERP 多模块工程 + RBAC 5 表 + 字典 + 操作日志
+- Week 11：物料 / 仓库 / 库存 / 采购 / 销售 完整业务闭环
+- Week 12：EasyExcel + Dashboard + `docker-compose` 一键部署
 
 [详见 `docs/week9/` ~ `docs/week12/`](docs/)
 
 </td>
 </tr>
 </table>
+
+## 一键启 ERP（Week 10-12 产出）
+
+```bash
+git clone https://github.com/xxf66666/Java-Learn.git
+cd Java-Learn/docker
+docker-compose up -d --build
+# 等几分钟构建完成
+open http://localhost:8080/doc.html
+# 登录：admin / admin123
+```
+
+完整业务流程演示（IDEA HTTP Client 打开 `code/project/api.http` 点 ▶）：
+
+1. 登录 → 拿 JWT → 看我的菜单 / 权限
+2. 创建采购单 → 审核 → 入库（库存 +10、流水 +1 条）
+3. 创建销售单 → 审核 → 出库（库存 -3、流水 +1 条）
+4. 查库存：剩 7；查流水：2 条；操作日志：自动入库
+
+详细见 [`code/project/README.md`](code/project/README.md)。
 
 ## 仓库结构
 
