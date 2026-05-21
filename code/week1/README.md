@@ -12,9 +12,27 @@
 
 ## 在 IDEA 里运行
 
+### ⚠️ 看不到 main 方法旁的绿色小三角？
+
+Java 文件必须在 **Sources Root** 目录下，IDEA 才会识别 `main` 方法。
+
+**操作步骤**（一次性配置）：
+
 1. `File → Open` 打开 `Java-Learn` 整个仓库目录
-2. 右键 `code/week1` 文件夹 → `Mark Directory as → Sources Root`（让 IDEA 识别为源码）
-3. 打开任意 `.java` 文件，点 `main` 方法旁的绿色三角运行
+2. 在左侧项目树里**右键** `code/week1` 文件夹
+3. 选 `Mark Directory as` → `Sources Root`
+   - 图标会变成**蓝色文件夹**（带橙色小角）
+   - IDEA 重新索引几秒
+4. 打开任意 `.java` 文件，`main` 方法左侧的**绿色三角**就出现了
+5. 点三角 → `Run 'HelloWorld.main()'`，或快捷键 `⌃R` (Mac) / `Ctrl+Shift+F10` (Win)
+
+> 对 `code/week2`、`code/week3` 也都各自 Mark 一次。从 Week 4 起用 Maven，**不用再 Mark**，打开 `pom.xml` 就自动识别。
+
+### 如果还不行
+
+- 检查项目 SDK：`File → Project Structure → Project → SDK` 要是 JDK 21
+- 检查模块语言级别：`Project Structure → Modules → Language level` 选 21
+- 重启 IDEA：`File → Invalidate Caches… → Invalidate and Restart`
 
 ## 命令行运行（不依赖 IDEA）
 
