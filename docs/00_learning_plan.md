@@ -23,7 +23,7 @@ Java-Learn/
 | Phase | 周次 | 主题 | 关键产出 |
 |-------|------|------|----------|
 | **1. 语言基础** | W1 | Java 语法速通（C++/Python 对照） | 命令行计算器 |
-| | **W1.5** | **语法专项**（类型 / 字符串 / 修饰符 / 枚举 / 内部类 / 泛型 / 注解反射） | 8 个独立 demo |
+| | **W1.5** | **OOP 地基 + 常用语法**（方法/类/构造器/封装/继承/抽象接口 + 类型/字符串/集合/枚举/Lambda/泛型/注解） | 12 个独立 demo |
 | | W2 | OOP + 集合 + 异常 + IO | 学生管理系统（内存版） |
 | | W3 | 并发 + JVM + Stream | 多线程文件统计工具 |
 | **2. 工程化 + 持久层** | W4 | Maven + JUnit + JDBC + MySQL | JDBC 通讯录 |
@@ -75,19 +75,25 @@ code/week1/
 
 ---
 
-### Week 1.5：语法专项
+### Week 1.5：OOP 地基 + 常用语法
 
-Week 1 速通后**先消化这一周再进 Week 2**。把容易踩坑、Week 1 跳过的语法细节系统补齐。
+Week 1 速通后**先消化这一周再进 Week 2**。从最底层重新讲，不假定任何语言背景。
 
-**8 个主题**
-1. **基本类型 + 装箱拆箱**：Integer 缓存、整数溢出、浮点精度（BigDecimal）
-2. **数组 + varargs**：一维 / 二维 / Arrays 工具类 / 可变参数
-3. **字符串深入**：不可变、常量池、StringBuilder、文本块
-4. **修饰符总览**：访问 + static / final / abstract / synchronized / volatile / transient
-5. **枚举**：基础 + 带字段方法 + 实现接口 + EnumMap
-6. **内部类 + Lambda**：静态内部类（Builder）、匿名类、Lambda、方法引用、变量捕获
-7. **泛型进阶**：? extends / ? super、PECS、类型擦除
-8. **注解 + 反射初步**：自定义注解、反射 new、读注解、迷你 IoC
+**地基篇（按序学，5 天）**
+- **00 方法**：定义 / 调用 / 参数传递 / 重载
+- **01 类与对象**：蓝图 vs 实例 / new / 字段 / 实例方法
+- **02 构造器与 this**：构造器形态 / 重载 / `this(...)`
+- **03 封装 + static**：private 字段 + getter/setter / 工具类
+- **04 继承 + 多态**：extends / super / @Override / 父类引用子类对象
+- **05 抽象类 + 接口**：abstract / interface / implements 多个
+
+**常用语法篇（按需读，3-5 天）**
+- **06 基本类型 + 字符串**：Integer 缓存 / BigDecimal / String 池 / StringBuilder
+- **07 数组 + 集合初见**：数组 / Arrays / varargs / ArrayList / HashMap
+- **08 枚举**：基础 / 带字段方法 / switch / 实现接口
+- **09 Lambda 入门**：函数式接口 / 方法引用 / Stream 初见 / 变量捕获
+- **10 泛型入门**：自定义泛型类 / 泛型方法 / 通配符 / 类型擦除
+- **11 注解 + 反射初步**：自定义注解 / 反射 new / 读注解 / 迷你 IoC
 
 详见 [`docs/week1.5/`](week1.5/)
 
