@@ -1,40 +1,61 @@
-# Week 1.5 · 语法专项（Java Language Deep Dive）
+# Week 1.5 · 语法专项（OOP 基础 + 常用语法）
 
-> 这是 **Week 1 和 Week 2 之间的补充周**。Week 1 速通了语法，但有很多易错点和细节没讲透。本周把它们系统补齐，**学完 Week 2 之前**先消化掉。
+> Week 1 让你能在 IDEA 里敲出能跑的代码。但你只学会了"语法长什么样"，没学会"**怎么用 Java 思考**"。
 >
-> 阅读顺序：按编号即可。每一节都有配套代码可以跑、可以 debug。
+> 本周从最底层重新讲：**方法 → 类 → 对象 → 构造器 → 封装 → 继承 → 多态 → 抽象类 / 接口**，然后再补常用语法（基本类型、字符串、数组、枚举、Lambda、泛型、注解）。
+>
+> 学完这周再进 Week 2，写代码会**完全没有阻力**。
 
 ## 笔记顺序
 
+### 地基篇（必学，按序读）
+
+| 序号 | 文件 | 核心概念 |
+|------|------|---------|
+| 00 | [`00_methods.md`](00_methods.md) | **方法** —— Java 里"函数"的正式名字 |
+| 01 | [`01_classes_and_objects.md`](01_classes_and_objects.md) | **类与对象** —— 蓝图 vs 实例 |
+| 02 | [`02_constructors_and_this.md`](02_constructors_and_this.md) | **构造器与 this** —— 对象诞生的入口 |
+| 03 | [`03_encapsulation_and_static.md`](03_encapsulation_and_static.md) | **封装** + **static** |
+| 04 | [`04_inheritance_and_polymorphism.md`](04_inheritance_and_polymorphism.md) | **继承** + **多态** |
+| 05 | [`05_abstract_and_interface.md`](05_abstract_and_interface.md) | **抽象类** vs **接口** |
+
+### 常用语法篇（可按需读）
+
 | 序号 | 文件 | 主题 |
 |------|------|------|
-| 00 | [`00_primitives_and_conversions.md`](00_primitives_and_conversions.md) | 基本类型、装箱拆箱、Integer 缓存、整数溢出、浮点精度 |
-| 01 | [`01_arrays_and_varargs.md`](01_arrays_and_varargs.md) | 数组（一维 / 二维）、Arrays 工具类、可变参数 varargs |
-| 02 | [`02_strings_in_depth.md`](02_strings_in_depth.md) | String 不可变、字符串池、StringBuilder、文本块 |
-| 03 | [`03_modifiers.md`](03_modifiers.md) | 全部修饰符：访问 + static / final / abstract / synchronized / volatile / transient |
-| 04 | [`04_enums.md`](04_enums.md) | 枚举：基础 + 带字段方法 + 实现接口 + EnumMap |
-| 05 | [`05_inner_classes_lambdas.md`](05_inner_classes_lambdas.md) | 内部类 4 种 + 匿名类 + Lambda 对比 |
-| 06 | [`06_generics_advanced.md`](06_generics_advanced.md) | 通配符 ? extends / ? super、PECS、类型擦除 |
-| 07 | [`07_annotations_reflection.md`](07_annotations_reflection.md) | 自定义注解 + 反射读取 + 动态创建对象 |
+| 06 | [`06_primitives_and_strings.md`](06_primitives_and_strings.md) | 基本类型 + 包装类 + 字符串 |
+| 07 | [`07_arrays_and_collections_intro.md`](07_arrays_and_collections_intro.md) | 数组 + List / Map 初见 |
+| 08 | [`08_enums.md`](08_enums.md) | 枚举 |
+| 09 | [`09_lambda_intro.md`](09_lambda_intro.md) | Lambda 入门 |
+| 10 | [`10_generics_intro.md`](10_generics_intro.md) | 泛型入门 |
+| 11 | [`11_annotations_intro.md`](11_annotations_intro.md) | 注解 + 反射初步 |
 
 ## 配套代码
 
 → [`../../code/week1.5/`](../../code/week1.5/)
 
+每一篇都配一个独立的 demo，可以在 IDEA 里直接点小三角运行。
+
+## 学习节奏建议
+
+- **00-05 地基篇**：每天 1-2 篇，每篇配套代码跑一遍 + debug 一遍 → 5 天
+- **06-11 语法篇**：每天 1-2 篇，挑感兴趣的先读 → 3-5 天
+
+> 不一定要全部学完才往后走。**00-05 是硬底子**，至少要会。06-11 在 Week 2 实战里也会反复遇到，遇到再回来翻也行。
+
 ## 本周里程碑
 
-到周末你应该能：
-- 解释为什么 `Integer x=200,y=200; x==y` 是 `false`
-- 用 BigDecimal 而不是 double 算钱，知道为啥
-- 自己写一个可变参数方法
-- 不查文档说出全部 8 个非访问修饰符的作用
-- 设计一个带"积分倍数"字段的 `MemberLevel` 枚举
-- 解释 Lambda 和匿名内部类的差异（编译产物 / 作用域）
-- 解释 `List<? extends Number>` 和 `List<? super Integer>` 各能做什么
+学完地基篇后你应该能：
+- 自己设计一个类（字段 + 方法 + 构造器），并 new 出对象使用
+- 解释"什么是对象"、"对象在内存里长什么样"
+- 写出有 `private` 字段 + `public` getter/setter 的类
+- 写一个父类 + 两个子类，并演示多态
+- 解释 `abstract class` 和 `interface` 的差异，知道什么时候用哪个
+
+学完语法篇后你应该能：
+- 解释 Integer 缓存的坑、用 BigDecimal 算钱
+- 用 ArrayList 和 HashMap 完成基本数据操作
+- 设计带字段的枚举（如订单状态）
+- 看懂 Lambda 表达式、写出最简单的 Stream 操作
+- 看懂 `<T>` 和 `<? extends Number>` 是什么意思
 - 自定义一个注解并用反射读取它
-
-## 为什么把这一周插在这里
-
-- Week 1 速通后，**直接进入 Week 2 学 OOP** 会被各种"小语法坑"卡住
-- 这些坑里最常见的：Integer 缓存、equals/hashCode 配套、修饰符含义、Lambda 用法等
-- 学完 Week 1.5 再去看 Week 2 的 `Student`、`Shape` 例子会**完全没有阻力**

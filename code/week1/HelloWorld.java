@@ -25,7 +25,7 @@ public class HelloWorld {
 
         // System.out 是 JDK 内置的标准输出对象
         // println = print + line（输出后换行），相当于 Python 的 print
-        System.out.println("Hello, Java!");
+        System.out.print("Hello, Java!");
 
         // 字符串拼接：Java 里 + 可以把 String 和其他类型拼起来
         // args.length 是数组的长度属性（不是方法，没有括号）
